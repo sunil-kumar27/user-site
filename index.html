@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Online Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="storefront-view">
+
+        <div id="store-announcement" class="store-announcement" hidden></div>
+
+        <!-- Navigation -->
+        <header>
+        <a class="logo" href="#home" aria-label="ShopEase home">
+            <span class="logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path class="logo-bag" d="M5 8h14l1.5 12h-17L5 8Z" />
+                    <path class="logo-handle" d="M9 8V6.5a3 3 0 0 1 6 0V8" />
+                    <path class="logo-ribbon" d="M14.8 11.1c-1.7-1.1-5.2-.6-5.3 1-.1 1.5 5.2 1 5.2 2.7 0 1.8-3.8 2.3-5.8 1" />
+                </svg>
+            </span>
+            <span class="logo-word">ShopEase<span class="logo-dot">.</span></span>
+        </a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒 Cart (<span id="cart-count">0</span>)
+        </button>
+    </header>
+
+    <section class="category-shortcuts" id="home" aria-label="Shop by category">
+        <div id="category-shortcuts-list" class="category-shortcuts-list"></div>
+    </section>
+
+    <!-- Products -->
+    
+
+
+
+    <section class="products-section" id="products">
+        <div class="product-grid" id="product-list"></div>
+        <div class="collection-title"><p class="collection-eyebrow">THE SHOP EASE EDIT</p><h2>Find your next favorite</h2></div>
+        <p class="subtitle">Considered everyday essentials, chosen for you.</p>
+        <div class="search-container">
+            <input type="search" id="product-search" placeholder="Search the collection..." aria-label="Search products">
+            <button type="button" onclick="filterProducts()" aria-label="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"></circle><path d="m16 16 4.2 4.2"></path></svg></button>
+            <span id="product-count" class="product-count"></span>
+            <label class="sort-control">Sort by<select id="product-sort"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name</option></select></label>
+        </div>
+        <div class="categories" id="category-filter"></div>
+        
+<!-- Product Details Popup -->
+<div class="product-modal" id="product-modal">
+
+    <div class="product-modal-content">
+
+        <button class="close-modal"
+            onclick="closeProductDetails()">✕</button>
+
+        <img id="detail-image" src="" alt="Product">
+
+        <div class="detail-info">
+
+            <h2 id="detail-name"></h2>
+
+            <h3 id="detail-price"></h3>
+
+            <p id="detail-description"></p>
+
+            <label>Quantity:</label>
+
+            <input type="number"
+                id="detail-quantity"
+                value="1"
+                min="1">
+
+            <button class="add-btn"
+                onclick="addDetailProductToCart()">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    </section>
+    <!-- Cart -->
+    <div class="cart-panel" id="cart-panel">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button onclick="toggleCart()">✕</button>
+        </div>
+
+        <div id="cart-items"></div>
+
+        <h3>Total: <span id="cart-total">₹0</span></h3>
+        <button class="checkout-btn" onclick="checkout()">
+            Checkout
+        </button>
+    </div>
+
+    <div class="checkout-modal" id="checkout-modal" aria-hidden="true">
+        <section class="checkout-content" aria-labelledby="checkout-title">
+            <div class="checkout-header">
+                <div>
+                    <p class="checkout-step">CHECKOUT / STEP 1 OF 2</p>
+                    <h2 id="checkout-title">Delivery details</h2>
+                </div>
+                <button class="checkout-back" type="button" onclick="backToCart()">Back to cart</button>
+            </div>
+            <div id="checkout-form-view" class="checkout-layout">
+                <form id="checkout-form" onsubmit="placeOrder(event)">
+                    <label for="checkout-name">Full name</label>
+                    <input id="checkout-name" name="name" autocomplete="name" required>
+
+                    <label for="checkout-email">Email address</label>
+                    <input id="checkout-email" name="email" type="email" autocomplete="email" required>
+
+                    <label for="checkout-phone">Phone number</label>
+                    <input id="checkout-phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" autocomplete="tel" required>
+
+                    <label for="checkout-address">Delivery address</label>
+                    <textarea id="checkout-address" name="address" rows="3" autocomplete="street-address" required></textarea>
+
+                    <div class="checkout-location-fields">
+                        <div>
+                            <label for="checkout-city">City</label>
+                            <input id="checkout-city" name="city" autocomplete="address-level2" required>
+                        </div>
+                        <div>
+                            <label for="checkout-pincode">PIN code</label>
+                            <input id="checkout-pincode" name="pincode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="postal-code" required>
+                        </div>
+                    </div>
+
+                    <label for="checkout-payment">Payment method</label>
+                    <select id="checkout-payment" name="payment">
+                        <option>Cash on delivery (demo)</option>
+                    </select>
+
+                    <button class="checkout-btn" type="submit">Place demo order</button>
+                </form>
+                <aside class="checkout-summary">
+                    <h3>Order summary</h3>
+                    <div id="checkout-items"></div>
+                    <p class="checkout-total">Total <strong id="checkout-total"></strong></p>
+                </aside>
+            </div>
+        </section>
+    </div>
+
+    <div class="order-screen" id="order-screen" aria-hidden="true">
+        <section class="order-screen-content" aria-labelledby="order-screen-title">
+            <div class="order-success-mark" aria-hidden="true">&#10003;</div>
+            <p class="checkout-step">DEMO ORDER CONFIRMED</p>
+            <h1 id="order-screen-title">Thank you for your order!</h1>
+            <p class="order-number" id="confirmation-message"></p>
+
+            <div class="order-screen-details">
+                <div>
+                    <h2>Items ordered</h2>
+                    <div id="order-items"></div>
+                </div>
+                <div class="order-delivery">
+                    <h2>Delivery details</h2>
+                    <p id="order-customer-name"></p>
+                    <p id="order-email"></p>
+                    <p id="order-address"></p>
+                    <p id="order-phone"></p>
+                    <h2>Payment</h2>
+                    <p id="order-payment"></p>
+                    <p class="order-total">Total <strong id="order-total"></strong></p>
+                </div>
+            </div>
+
+            <button class="checkout-btn" type="button" onclick="closeOrderScreen()">Continue shopping</button>
+        </section>
+    </div>
+
+<!-- About -->
+    <section class="about" id="about">
+        <h2>About ShopEase</h2>
+        <p>
+            We make online shopping simple, convenient and enjoyable.
+            Discover products you'll love, all in one place.
+        </p>
+    </section>
+
+    <footer>
+        <p>© 2026 ShopEase. All rights reserved.</p>
+        <p id="store-support-email"></p>
+    </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+
+</body>
+</html>
+
+
+
+
+
