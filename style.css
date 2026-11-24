@@ -1091,3 +1091,47 @@ footer {
 @media (prefers-reduced-motion: reduce) {
     #storefront-view *, #storefront-view *::before, #storefront-view *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* Warm cream, golden yellow and plum palette from the design reference */
+#storefront-view { --shop-ink: #35171d; --shop-clay: #7a302e; --shop-clay-dark: #4a2025; --shop-ivory: #fff8eb; --shop-sand: #ffdf7a; --shop-line: #eadcc2; --shop-sage: #647b43; background: var(--shop-ivory); color: var(--shop-ink); }
+#storefront-view .store-announcement { background: #35171d; color: #fff8eb; }
+#storefront-view header { background: rgba(255, 248, 235, .97); border-color: #eadcc2; }
+#storefront-view header .logo, #storefront-view .logo-word, #storefront-view .logo-dot { color: #35171d; }
+#storefront-view header nav a { color: #59433d; }
+#storefront-view header nav a:hover { color: #a34c27; }
+#storefront-view .cart-btn { border-color: #d8c5a7; background: #fffdf7; color: #35171d; }
+#storefront-view .category-shortcut-image { border-color: #e8d9bd; background: #f4ead7; }
+#storefront-view .category-shortcut.active .category-shortcut-image { border-color: #79332e; box-shadow: 0 0 0 3px rgba(121, 51, 46, .09); }
+#storefront-view .collection-eyebrow { color: #8d3c29; }
+#storefront-view .products-section h2, #storefront-view .product-card h3 { color: #35171d; }
+#storefront-view .subtitle { color: #79675c; }
+#storefront-view .search-container { border-color: #e7d8be; }
+#storefront-view .search-container input, #storefront-view .search-container button, #storefront-view .sort-control select { border-color: #ddcba9; background: #fffdf8; color: #35171d; }
+#storefront-view .search-container button:hover { border-color: #74302d; background: #f8e9bd; color: #4a2025; }
+#storefront-view .categories { border-color: #eadcc2; }
+#storefront-view .categories::before { color: #614a3f; }
+#storefront-view .category-btn { color: #59443b; }
+#storefront-view .category-btn:hover, #storefront-view .category-btn.active { border-color: #d7a84d; background: #ffe89c; color: #4a2025; }
+#storefront-view .product-grid { padding: 16px; border-radius: 20px; background: #ffdf7a; }
+#storefront-view .product-card { border-color: rgba(89, 57, 38, .12); background: #fffaf0; box-shadow: 0 3px 12px rgba(77, 44, 25, .08); }
+#storefront-view .product-card:hover { border-color: rgba(74, 32, 37, .28); box-shadow: 0 14px 28px rgba(77, 44, 25, .16); }
+#storefront-view .product-media { background: #f1a43c; }
+#storefront-view .product-card[data-category="Fashion"] .product-media { background: #ed8985; }
+#storefront-view .product-card[data-category="Shoes"] .product-media { background: #f1a43c; }
+#storefront-view .product-card[data-category="Electronics"] .product-media { background: #83b4d5; }
+#storefront-view .product-card[data-category="Bags"] .product-media { background: #a9c476; }
+#storefront-view .product-card[data-category="Accessories"] .product-media { background: #c5b4d2; }
+#storefront-view .product-category, #storefront-view .product-stock-badge { border-color: rgba(74, 32, 37, .1); background: rgba(255, 250, 240, .94); color: #4a2025; }
+#storefront-view .product-stock-badge { color: #7b302b; }
+#storefront-view .product-card .price { color: #35171d; }
+#storefront-view .stock-availability { color: #617445; }
+#storefront-view .product-actions .product-details-btn { border-color: #d8c4a5; background: #fffdf7; color: #4b302c; }
+#storefront-view .product-actions .product-details-btn:hover { border-color: #74302d; background: #f7e6b7; color: #4a2025; }
+#storefront-view .product-actions .add-btn.secondary, #storefront-view .checkout-btn { border-color: #421e24; background: #421e24; color: #fff8eb; }
+#storefront-view .product-actions .add-btn.secondary:hover, #storefront-view .checkout-btn:hover { border-color: #73312e; background: #73312e; }
+#storefront-view .about { background: #e9edda; color: #35171d; }
+#storefront-view .about p { color: #5f624f; }
+#storefront-view footer { background: #35171d; color: #fff8eb; }
+#storefront-view :is(button, a, input, select):focus-visible { outline-color: rgba(122, 48, 46, .55); }
+@media (max-width: 820px) { #storefront-view .product-grid { padding: 12px; } }
+@media (max-width: 560px) { #storefront-view .product-grid { padding: 9px; border-radius: 16px; } }

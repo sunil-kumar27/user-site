@@ -251,7 +251,7 @@ function displayProducts(list = products) {
 
     list.forEach(product => {
         productList.innerHTML += `
-            <article class="product-card">
+            <article class="product-card" data-category="${escapeProductHTML(product.category)}">
                 <div class="product-media">
                     <span class="product-category">${escapeProductHTML(product.category)}</span>
                     <img src="${escapeProductHTML(product.image || "images/hero-shopping.jpg")}" alt="${escapeProductHTML(product.name)}" loading="lazy" onerror="this.hidden=true;">
