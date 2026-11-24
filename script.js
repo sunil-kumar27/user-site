@@ -335,7 +335,7 @@ function updateCart() {
     let total = 0;
     let count = 0;
 
-    cartItems.innerHTML = "";
+    cartItems.innerHTML = cart.length ? "" : '<p class="cart-empty">Your cart is empty. Add something you love to get started.</p>';
 
     cart.forEach(item => {
         total += item.price * item.quantity;
@@ -564,6 +564,10 @@ function showProductDetails(id) {
     detailPrice.textContent = formatCurrency(product.price);
     detailDescription.textContent = `Discover our ${product.name}. A perfect choice for your daily lifestyle and comfort.`;
     detailQuantity.value = 1;
+    detailQuantity.max = String(product.stock);
+    detailQuantity.disabled = product.stock <= 0;
+    const addButton = productModal.querySelector(".detail-info .add-btn");
+    if (addButton) addButton.disabled = product.stock <= 0;
 
     productModal.style.display = "flex";
 }
@@ -582,9 +586,9 @@ function addDetailProductToCart() {
     if (!detailQuantity || !detailName) return;
 
     const product = products.find(item => item.name === detailName.textContent.trim());
-    const quantity = Number(detailQuantity.value) || 1;
+    const quantity = Number(detailQuantity.value);
 
-    if (!product) return;
+    if (!product || !Number.isSafeInteger(quantity) || quantity < 1) return;
 
     const existingItem = cart.find(item => item.id === product.id);
     const alreadyInCart = existingItem ? existingItem.quantity : 0;
@@ -614,9 +618,9 @@ if (window.location.protocol !== "file:") {
     fetch("/api/products").then(response => response.ok ? response.json() : null).then(remoteProducts => {
         if (!Array.isArray(remoteProducts) || !remoteProducts.length || !isValidSavedProductList(remoteProducts)) return;
         products.splice(0, products.length, ...remoteProducts);
-        localStorage.setItem(PRODUCT_STORAGE_KEY, JSON.stringify(products));
-        renderCategories();
-        displayProducts();
+        try { localStorage.setItem(PRODUCT_STORAGE_KEY, JSON.stringify(products)); }
+        catch (error) { console.warn("Could not cache the MongoDB catalog in browser storage.", error); }
+        refreshStorefrontProducts();
     }).catch(error => console.warn("MongoDB catalog is unavailable; using the local catalog.", error));
 }
 renderCategories();

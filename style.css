@@ -1023,6 +1023,8 @@ footer {
 #storefront-view .product-card .add-btn:hover { border-color: var(--shop-clay-dark); background: var(--shop-clay-dark); color: #fffaf3; }
 #storefront-view .product-card .add-btn.secondary { border-color: var(--shop-ink); background: var(--shop-ink); color: #fffaf3; }
 #storefront-view .product-card .add-btn.secondary:hover { border-color: var(--shop-clay-dark); background: var(--shop-clay-dark); }
+#storefront-view .cart-empty { padding: 24px 12px; color: #81766a; text-align: center; line-height: 1.6; }
+#storefront-view .detail-info .add-btn:disabled { opacity: .55; cursor: not-allowed; }
 #storefront-view .about { background: #eeeee7; color: #403d35; }
 #storefront-view .about p { color: #6b6b60; }
 #storefront-view footer { background: #343832; color: #f5f1e8; }
