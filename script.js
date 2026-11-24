@@ -251,18 +251,24 @@ function displayProducts(list = products) {
 
     list.forEach(product => {
         productList.innerHTML += `
-            <div class="product-card">
-                <img src="${escapeProductHTML(product.image || "images/hero-shopping.jpg")}" alt="${escapeProductHTML(product.name)}" onerror="this.hidden=true;">
-                <h3>${escapeProductHTML(product.name)}</h3>
-                <p class="price">${formatCurrency(product.price)}</p>
-                <p class="stock-availability">${product.stock > 0 ? `${product.stock} available` : "Out of stock"}</p>
-                <button class="add-btn" onclick="showProductDetails(${product.id})">
-                    View Details
-                </button>
-                <button class="add-btn secondary" onclick="addToCart(${product.id})" ${product.stock <= 0 ? "disabled" : ""}>
-                    Add to Cart
-                </button>
-            </div>
+            <article class="product-card">
+                <div class="product-media">
+                    <span class="product-category">${escapeProductHTML(product.category)}</span>
+                    <img src="${escapeProductHTML(product.image || "images/hero-shopping.jpg")}" alt="${escapeProductHTML(product.name)}" loading="lazy" onerror="this.hidden=true;">
+                    ${product.stock <= 0 ? '<span class="product-stock-badge">Sold out</span>' : ""}
+                </div>
+                <div class="product-info">
+                    <div class="product-copy">
+                        <h3>${escapeProductHTML(product.name)}</h3>
+                        <p class="stock-availability">${product.stock > 0 ? `${product.stock} available` : "Out of stock"}</p>
+                    </div>
+                    <p class="price">${formatCurrency(product.price)}</p>
+                    <div class="product-actions">
+                        <button class="add-btn product-details-btn" type="button" onclick="showProductDetails(${product.id})">View details</button>
+                        <button class="add-btn secondary" type="button" onclick="addToCart(${product.id})" ${product.stock <= 0 ? "disabled" : ""}>Add to cart</button>
+                    </div>
+                </div>
+            </article>
         `;
     });
 }
